@@ -11,7 +11,7 @@ Me ønskjer følgjande utviding av applikasjonen:
 * Leggje til ny bil og slette bil
 * Redigere data på ein bil
 
-Me ønskjer også at du peikar på openbare problem med applikasjonen og løyser desse. Me vil ikkje særleg vekt på det grafiske utover fornuftig bruk av html/javascript/css, så ikkje legg for mykje tid i det.
+Me ønskjer også at du peikar på openbare problem med applikasjonen og løyser desse. Me vil ikkje leggje særleg vekt på det grafiske utover fornuftig bruk av html/javascript/css, så ikkje legg for mykje tid i det.
 
 Visual Studio Community kan lastast ned gratis hjå Microsoft: https://visualstudio.microsoft.com/vs/community/
 Database i denne løysinga er localdb, du peikar sjølv til rett stad i appsettings.json
