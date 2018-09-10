@@ -20,6 +20,32 @@ Last ned kildekoden til din maskin og last opp til eigen github-profil eller sen
 
 Lukke til!
 
+Edit: Dersom du ikkje får brukt localdb-filene kan du nytte følgjande sql til å opprette tabellane til oppgåva:
+
+```
+CREATE TABLE [dbo].[Car] (
+    [LicensePlate] VARCHAR (10) NOT NULL,
+    [Description]  VARCHAR (50) NULL,
+    [Model]        VARCHAR (50) NULL,
+    [Brand]        VARCHAR (50) NULL,
+    [TireCount]    INT          NULL,
+    [CompanyId]    INT          NULL
+);
+
+GO;
+
+CREATE TABLE [dbo].[Settings] (
+    [id]           INT          NOT NULL,
+    [companyId]    INT          NULL,
+    [setting]      VARCHAR (50) NULL,
+    [settingValue] VARCHAR (50) NULL
+);
+
+GO;
+
+```
+Du kan då nytte eigen databasemotor i botnen, til dømes SQLite.
+
 ## English
 
 NorbitsChallenge is an ASP.NET Core web application created in Visual Studio 2017.
@@ -40,3 +66,32 @@ The database for this solution is localdb. You need to point to the right file l
 Download the code to you compupter and upload to your personal github profile or send us a link when you are done. Do not submit a pull request to this repository, as this will make your code available to any other applicants.
 
 Good luck!
+
+Edit:
+
+If you have problems using the localdb-files you can use the following scripts to create the tables needed:
+
+```
+CREATE TABLE [dbo].[Car] (
+    [LicensePlate] VARCHAR (10) NOT NULL,
+    [Description]  VARCHAR (50) NULL,
+    [Model]        VARCHAR (50) NULL,
+    [Brand]        VARCHAR (50) NULL,
+    [TireCount]    INT          NULL,
+    [CompanyId]    INT          NULL
+);
+
+GO;
+
+CREATE TABLE [dbo].[Settings] (
+    [id]           INT          NOT NULL,
+    [companyId]    INT          NULL,
+    [setting]      VARCHAR (50) NULL,
+    [settingValue] VARCHAR (50) NULL
+);
+
+GO;
+
+```
+You can then use your preferred database engine, e.g. SQLite.
+
