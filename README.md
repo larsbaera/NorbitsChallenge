@@ -63,7 +63,7 @@ We also want you to point out any obvious problems in the application and solve 
 Visual Studio Community can be downloaded for free from Microsoft: https://visualstudio.microsoft.com/vs/community/
 The database for this solution is localdb. You need to point to the right file location in appsettings.json
 
-Download the code to you compupter and upload to your personal github profile or send us a link when you are done. Do not submit a pull request to this repository, as this will make your code available to any other applicants.
+Download the code to you computer and upload to your personal github profile or send us a link when you are done. Do not submit a pull request to this repository, as this will make your code available to any other applicants.
 
 Good luck!
 
