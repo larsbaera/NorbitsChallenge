@@ -1,6 +1,6 @@
 # NorbitsChallenge
 
-NorbitsChallenge er ein .NET 5 webapplikasjon for Visual Studio 2019. 
+NorbitsChallenge er ein .NET 6 webapplikasjon for Visual Studio. 
 NorbitsChallenge er tiltenkt å late tilsette på verkstadar slå opp informasjon om bilar knytt til sin verkstad. 
 Autentisering er utelatt frå denne versjonen for forenkling. 
 
@@ -48,7 +48,7 @@ Du kan då nytte eigen databasemotor i botnen, til dømes SQLite.
 
 ## English
 
-NorbitsChallenge is a .NET 5 web application for Visual Studio 2019.
+NorbitsChallenge is a .NET 6 web application for Visual Studio.
 NorbitsChallenge allows employees at car workshops look up information on cars attached to their workshop.
 Authentication is omitted in this version for simplification purposes.
 
