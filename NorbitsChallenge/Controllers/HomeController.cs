@@ -24,14 +24,15 @@ namespace NorbitsChallenge.Controllers
         {
             var model = GetCompanyModel();
             return View(model);
+
         }
 
         [HttpPost]
         public JsonResult Index(int companyId, string licensePlate)
         {
             var tireCount = new CarDb(_config).GetTireCount(companyId, licensePlate);
-
             var model = GetCompanyModel();
+
             model.TireCount = tireCount;
 
             return Json(model);
@@ -61,6 +62,8 @@ namespace NorbitsChallenge.Controllers
         {
             return View(new ErrorViewModel { RequestId = Activity.Current?.Id ?? HttpContext.TraceIdentifier });
         }
+
+        // Her bør det
 
         private HomeModel GetCompanyModel()
         {

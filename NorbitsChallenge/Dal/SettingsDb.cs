@@ -22,7 +22,7 @@ namespace NorbitsChallenge.Dal
         {
             string companyName = "";
 
-            var connectionString = _config.GetSection("ConnectionString").Value;
+            var connectionString = _config.GetSection("ConnectionString").Value; 
 
             using (var connection = new SqlConnection(connectionString))
             {
