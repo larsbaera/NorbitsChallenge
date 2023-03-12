@@ -1,0 +1,43 @@
+﻿@model Car
+@{
+   ViewData["Ttile"] = "All Cars";
+}
+<div class="container">
+<h2> Showing all cars</h2>
+
+<div class="row">
+
+    <table class="table">
+        <thead>
+            <tr>
+                    <th>License Plate</th>
+                    <th>Manufacturer</th>
+                    <th>Model</th>
+                    <th>Description</th>
+                    <th>Tire Count</th>
+                    <th>CompanyId</th>
+            </tr>
+        </thead>
+        <tbody>
+            <tr>
+                <td>
+                   @*@Html.DisplayFor(GetManufacturer());*@
+                </td>
+            </tr>
+                @*@foreach (var i in Model)
+                {
+                    <tr>
+                        <td>@Html.DisplayFor(item => i.LicensePlate) </td>
+                        <td>@Html.DisplayFor(item => i.Manufacturer)</td>
+                        <td>@Html.DisplayFor(item => i.ProductionModel)</td>
+                        <td>@Html.DisplayFor(item => i.Desc)</td>
+                        <td>@Html.DisplayFor(item => i.TireCount)</td>
+                        <td>@Html.DisplayFor(item => i.CompanyId)</td>
+                        <td>@Html.ActionLink("Show","ShowCar", new {LicensePlate = i.LicensePlate})</td>
+                    </tr>
+                }*@
+        </tbody>
+    </table>
+
+</div>
+</div>
