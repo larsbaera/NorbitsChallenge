@@ -1,6 +1,6 @@
-﻿@model Car
+﻿@model HomeModel
 @{
-   ViewData["Ttile"] = "All Cars";
+   ViewData["Title"] = "All Cars";
 }
 <div class="container">
 <h2> Showing all cars</h2>
@@ -19,22 +19,17 @@
             </tr>
         </thead>
         <tbody>
-            <tr>
-                <td>
-                </td>
-            </tr>
-                @*@foreach (var i in Model)
+                @foreach (Car car in Model.Cars)
                 {
                     <tr>
-                        <td>@Html.DisplayFor(item => i.LicensePlate) </td>
-                        <td>@Html.DisplayFor(item => i.Manufacturer)</td>
-                        <td>@Html.DisplayFor(item => i.ProductionModel)</td>
-                        <td>@Html.DisplayFor(item => i.Desc)</td>
-                        <td>@Html.DisplayFor(item => i.TireCount)</td>
-                        <td>@Html.DisplayFor(item => i.CompanyId)</td>
-                        <td>@Html.ActionLink("Show","ShowCar", new {LicensePlate = i.LicensePlate})</td>
+                        <td>@car.LicensePlate</td>
+                        <td>@car.Manufacturer</td>
+                        <td>@car.ProductionModel</td>
+                        <td>@car.Desc</td>
+                        <td>@car.TireCount</td>
+                        <td>@car.CompanyId</td>
                     </tr>
-                }*@
+                }
         </tbody>
     </table>
 

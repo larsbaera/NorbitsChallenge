@@ -11,5 +11,7 @@ namespace NorbitsChallenge.Models
         public int CompanyId { get; set; }
         public int TireCount { get; set; }
         public string MakeModel { get; set;}
+
+        public List<Car> Cars { get; set; }
     }
 }

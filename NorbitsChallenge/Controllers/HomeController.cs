@@ -22,7 +22,16 @@ namespace NorbitsChallenge.Controllers
 
         public IActionResult Index()
         {
+            //Henter Company Model og Company Name
             var model = GetCompanyModel();
+            //var CompanyId = model.CompanyId;
+            //string licensePlate = "SU84886";
+            //var CarDb = new CarDb(_config);
+            // add a method to request data from server
+            //var car = CarDb.GetCarMakeModel(CompanyId, licensePlate );
+
+            //model.MakeModel = car;
+
             return View(model);
 
         }
@@ -56,6 +65,19 @@ namespace NorbitsChallenge.Controllers
         {
             return View();
         }
+        public IActionResult AllCars()
+        {
+
+            var model = GetCompanyModel();
+            var CompanyId = model.CompanyId;
+            var CarDb = new CarDb(_config);
+            // add a method to request data from server
+            var cars = CarDb.GetAllCars(CompanyId);
+
+            model.Cars = cars;
+
+            return View(model);
+        }
 
         [ResponseCache(Duration = 0, Location = ResponseCacheLocation.None, NoStore = true)]
         public IActionResult Error()
@@ -67,8 +89,11 @@ namespace NorbitsChallenge.Controllers
 
         private HomeModel GetCompanyModel()
         {
+            //Setter CompanyID som 1 eller henter den aktuelle instillingen
             var companyId = UserHelper.GetLoggedOnUserCompanyId();
+            //henter navnet som er linket til Det aktuelle CompanyID variablen.
             var companyName = new SettingsDb(_config).GetCompanyName(companyId);
+            //returner ny HomeModel Objekt med de aktuelle verdiene satt.
             return new HomeModel { CompanyId = companyId, CompanyName = companyName };
         }
     }

@@ -12,7 +12,7 @@
 </h2>
 <form asp-action="Index" data-ajax="true" data-ajax-method="POST" data-ajax-success="onSuccess">
     <input type="hidden" name="companyId" value="@Model.CompanyId" />
-    <input type="text" name="licensePlate" value="Reg. nummer"/>
+    <input type="text" name="licensePlate" value="#"/>
     <input type="submit" value="Søk" />
 </form>
 
@@ -21,11 +21,10 @@
     <div> Den valgte bilen er en <div id="makemodel" style="display: inline;"></div></div>
     <div>Denne bilen har <div id="tireCount" style="display: inline;"></div> dekk på dekkhotell</div>
 </div>
-
-
-    
 <hr/>
 <h4>Gå til <a asp-action="Index" asp-controller="Settings" asp-route-companyId="@Model.CompanyId">Innstillinger</a></h4>
+
+<h2>@Model.MakeModel </h2>
 
 @section Scripts
 {

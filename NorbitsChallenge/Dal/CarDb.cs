@@ -1,10 +1,14 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.ComponentModel.Design;
 using System.Data;
 using System.Data.SqlClient;
 using System.Linq;
+using System.Reflection;
 using System.Threading.Tasks;
+using Microsoft.AspNetCore.Mvc.RazorPages;
 using Microsoft.Extensions.Configuration;
+using NorbitsChallenge.Models;
 
 namespace NorbitsChallenge.Dal
 {
@@ -44,10 +48,39 @@ namespace NorbitsChallenge.Dal
             return result;
         }
 
-        public string GetCarMakeModel(int companyId, string licensePlate)
+        public int UpdateCar (string LP, string model, string brand, string desc, int tireCount, int CompId)
         {
-            string MakeModel = "";
+            var connectionString = _config.GetSection("ConnectionString").Value;
+            using (var connection = new SqlConnection(connectionString))
+            {
+                connection.Open();
+                using (var command = new SqlCommand { Connection = connection, CommandType = CommandType.Text })
+                {
+                    command.CommandText = $"Update dbo.car Set LicensePlate ='{LP}' Model = '{model}', Brand= '{brand}', TireCount= '{tireCount}', Description= '{desc}', CompanyId= '{CompId}'";
 
+                    return command.ExecuteNonQuery();
+                }
+            }
+        }
+
+
+        public int CreateCar(string LP, string model, string brand, string desc, int tireCount, int CompId)
+        {
+            var connectionString = _config.GetSection("ConnectionString").Value;
+            using (var connection = new SqlConnection(connectionString))
+            {
+                connection.Open();
+                using (var command = new SqlCommand { Connection = connection, CommandType = CommandType.Text })
+                {
+                    command.CommandText = $"INSERT INTO dbo.Car(LicensePlate, Description, Model, Brand, TireCount, CompanyId)" + $"Values ('{LP}', '{desc}', '{brand}','{model}','{tireCount}','{CompId}')";
+
+                    return command.ExecuteNonQuery();
+                }
+            }
+        }
+
+        public int DeleteCar(int companyId, string licensePlate)
+        {
             var connectionString = _config.GetSection("ConnectionString").Value;
 
             using (var connection = new SqlConnection(connectionString))
@@ -55,20 +88,75 @@ namespace NorbitsChallenge.Dal
                 connection.Open();
                 using (var command = new SqlCommand { Connection = connection, CommandType = CommandType.Text })
                 {
-                    command.CommandText = $"select * from car where companyId = {companyId} and licenseplate = '{licensePlate}'";
+                    command.CommandText = $"delete from dbo.car where companyId = {companyId} and licenseplate = '{licensePlate}'";
+
+                    return command.ExecuteNonQuery();
+                }
+            }
+        }
+
+
+        public Car SearchCar(int companyId, string licensePlate)
+        {
+            var connectionString = _config.GetSection("ConnectionString").Value;
+            var car = new Car();
+
+            using (var connection = new SqlConnection(connectionString))
+            {
+                connection.Open();
+                using (var command = new SqlCommand { Connection = connection, CommandType = CommandType.Text })
+                {
+                    command.CommandText = $"select * from car where LicensePlate like '%{licensePlate}%' and companyId = {companyId}";
+
                     using (var reader = command.ExecuteReader())
                     {
-                        if (reader.Read())
+                        while (reader.Read())
                         {
-                            string manufacturer = (string)reader["Brand"];
-                            string model = (string)reader["Model"];
-                            MakeModel = $"{manufacturer} {model}";
+                            car.LicensePlate = (string)reader["LicensePlate"];
+                            car.Desc = (string)reader["Description"];
+                            car.Manufacturer = (string)reader["Model"];
+                            car.ProductionModel = (string)reader["Brand"];
+                            car.TireCount = (int)reader["TireCount"];
+                            car.CompanyId = (int)reader["CompanyId"];
+
+                            return car;
+                        }
+                    }
+                }
+            }
+            return car;
+        }
+        public List<Car> GetAllCars (int companyId)
+        {
+            var Cars  = new List<Car>();
+            var connectionString = _config.GetSection("ConnectionString").Value;
+
+            using (var connection = new SqlConnection(connectionString))
+            {
+                connection.Open();
+                using (var command = new SqlCommand { Connection = connection, CommandType = CommandType.Text })
+                {
+                    command.CommandText = $"select * from car where companyId = {companyId}";
+                    using (var reader = command.ExecuteReader())
+                    {
+                        while (reader.Read())
+                        {
+                            var tempCar = new Car();
+                            tempCar.LicensePlate = (string)reader["LicensePlate"];
+                            tempCar.Manufacturer = (string)reader["Brand"];
+                            tempCar.ProductionModel = (string)reader["Model"];
+                            tempCar.Desc = (string)reader["Description"];
+                            tempCar.TireCount = (int)reader["TireCount"];
+                            tempCar.CompanyId = (int)reader["CompanyId"];
+
+                            Cars.Add(tempCar);
                         }
 
                     }
                 }
             }
-            return MakeModel;
+
+            return Cars;
         }
     }
 }
