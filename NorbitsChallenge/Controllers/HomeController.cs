@@ -1,7 +1,10 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.ComponentModel.Design;
 using System.Diagnostics;
+using System.Diagnostics.Metrics;
 using System.Linq;
+using System.Runtime.ConstrainedExecution;
 using System.Threading.Tasks;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.Extensions.Configuration;
@@ -65,6 +68,57 @@ namespace NorbitsChallenge.Controllers
         {
             return View();
         }
+        public IActionResult EditCar(string LicensePlate, string ProductionModel, string Manufacturer, string Description, int TireCount, int companyId)
+        {
+            CarUpdate editCar = new CarUpdate();
+            editCar.LicensePlate = LicensePlate;
+            editCar.Manufacturer = Manufacturer;
+            editCar.ProductionModel = ProductionModel;
+            editCar.Desc = Description;
+            editCar.TireCount = TireCount;
+            editCar.CompanyId = companyId;
+
+            return View(editCar);
+        }
+
+        [HttpPost]
+        public IActionResult EditCar(UpdateCar editCar)
+        {
+            var carDb = new CarDb(_config);
+            carDb.UpdateCar(editCar.LicensePlate, editCar.Manufacturer, editCar.ProductionModel, editCar.Desc, editCar.TireCount, editCar.CompanyId);
+            return RedirectToAction("AllCars");
+        }
+
+        public IActionResult RemoveCar(int CompanyId, string LicensePlate)
+        {
+            var carDb = new CarDb(_config);
+            carDb.DeleteCar(CompanyId, LicensePlate);
+            return RedirectToAction("AllCars");
+        }
+        public IActionResult AddCar()
+        {
+            return View();
+        }
+        [HttpPost]
+        public IActionResult AddCar(NewCar model)
+        {
+            var CarDb = new CarDb(_config);
+            var companyModel = GetCompanyModel();
+            var checkCar = CarDb.SearchCar(companyModel.CompanyId, model.LicensePlate);
+            if (!String.IsNullOrEmpty(checkCar.LicensePlate))
+            {
+                ViewData["ErrorMessage"] = "Car already exists, Please enter a different license plate.";
+                return View();
+            }
+            
+            else if (ModelState.IsValid) { 
+            
+                CarDb.CreateCar(model.LicensePlate, model.Manufacturer, model.ProductionModel, model.Desc, model.TireCount,model.CompanyId);
+                return RedirectToAction("Index");
+            }
+            return View();
+        }
+
         public IActionResult AllCars()
         {
 

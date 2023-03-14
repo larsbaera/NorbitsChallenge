@@ -56,7 +56,7 @@ namespace NorbitsChallenge.Dal
                 connection.Open();
                 using (var command = new SqlCommand { Connection = connection, CommandType = CommandType.Text })
                 {
-                    command.CommandText = $"Update dbo.car Set LicensePlate ='{LP}' Model = '{model}', Brand= '{brand}', TireCount= '{tireCount}', Description= '{desc}', CompanyId= '{CompId}'";
+                    command.CommandText = $"Update dbo.car Set Model = '{model}', Brand= '{brand}', TireCount= '{tireCount}', Description= '{desc}', CompanyId= '{CompId}' Where LicensePlate = '{LP}'";
 
                     return command.ExecuteNonQuery();
                 }

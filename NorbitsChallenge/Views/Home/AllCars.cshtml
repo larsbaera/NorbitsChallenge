@@ -5,6 +5,9 @@
 <div class="container">
 <h2> Showing all cars</h2>
 
+ <a class="btn btn-primary" asp-action="AddCar" value="Create New Car"> Create New Car </a>
+     
+
 <div class="row">
 
     <table class="table">
@@ -16,6 +19,7 @@
                     <th>Description</th>
                     <th>Tire Count</th>
                     <th>CompanyId</th>
+                    <th>Actions</th>
             </tr>
         </thead>
         <tbody>
@@ -28,10 +32,24 @@
                         <td>@car.Desc</td>
                         <td>@car.TireCount</td>
                         <td>@car.CompanyId</td>
+                        <td>
+                            @Html.ActionLink("Edit","EditCar", new {
+                                LicensePlate = car.LicensePlate,
+                                Manufacturer = car.Manufacturer,
+                                ProductionModel = car.ProductionModel,
+                                Description = car.Desc,
+                                TireCount = car.TireCount,
+                                CompanyId = car.CompanyId
+                            })
+                       |
+                            @Html.ActionLink("Remove", "RemoveCar", new { 
+                                licensePlate = car.LicensePlate, companyId = car.CompanyId 
+                            })
+                        </td>
                     </tr>
                 }
         </tbody>
     </table>
-
+        <a class="btn btn-info" asp-controller="home" asp-action="Index"> Back </a>
 </div>
 </div>

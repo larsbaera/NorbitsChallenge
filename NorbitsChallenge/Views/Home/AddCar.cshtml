@@ -1,0 +1,41 @@
+﻿@model NorbitsChallenge.Models.NewCar
+
+<h2>Add Car</h2>
+<div class="row">
+    <div class="col-md-4">
+        <form asp-action="AddCar">
+            <div class="text-danger"></div>
+            <div class="form-group">
+                <label asp-for="LicensePlate" class="control-label"></label>
+                <input asp-for="LicensePlate" class="form-control" />
+            </div>
+            <div class="form-group">
+                <label asp-for="Manufacturer" class="control-label"></label>
+                <input asp-for="Manufacturer" class="form-control" />
+            </div>
+            <div class="form-group">
+                <label asp-for="ProductionModel" class="control-label"></label>
+                <input asp-for="ProductionModel" class="form-control" />
+            </div>
+            <div class="form-group">
+                <label asp-for="Desc" class="control-label"></label>
+                <input asp-for="Desc" class="form-control" />
+            </div>
+            <div class="form-group">
+                <label asp-for="TireCount" class="control-label"></label>
+                <input asp-for="TireCount" class="form-control" />
+            </div>
+            <div class="form-group">
+                <label asp-for="CompanyId" class="control-label"></label>
+                <input asp-for="CompanyId" class="form-control" />
+            </div>
+
+            <div class="form-group" style="display: inline;padding-right:5px">
+                <input type="submit" value="Create" class="btn btn-default" />
+            </div>
+        </form>
+    </div>
+</div>
+<div>
+    <a asp-action="Index">Back</a>
+</div>

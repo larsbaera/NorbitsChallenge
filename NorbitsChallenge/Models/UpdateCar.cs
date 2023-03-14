@@ -4,7 +4,7 @@ using System.Xml.Linq;
 
 namespace NorbitsChallenge.Models
 {
-    public class CarViewModel
+    public class UpdateCar
     {
         [DisplayName("License plate")]
         public string LicensePlate { get; set; }
@@ -21,11 +21,5 @@ namespace NorbitsChallenge.Models
         [DisplayName("CompanyId")]
         public int CompanyId { get; set; }
 
-        public string CarManMod {
-            get
-            {
-                return Manufacturer + " - " + ProductionModel;
-            } 
-        }
     }
 }
