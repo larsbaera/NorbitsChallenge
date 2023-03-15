@@ -119,18 +119,28 @@ namespace NorbitsChallenge.Controllers
             return View();
         }
 
-        public IActionResult SearchCar(string LicensePlate)
-        {
-            var model = GetCompanyModel();
-            var CompanyId = model.CompanyId;
-            Car searchedCar = new Car();
-            var carDb = new CarDb(_config);
-            var cars = carDb.GetAllCars(CompanyId);
-            searchedCar = carDb.SearchCar(CompanyId, LicensePlate);
-            cars.Clear();
-            model.Cars.Add(searchedCar);
-            return RedirectToAction("AllCars", "Home", model);
-        }
+       //Not Implemented
+
+        //public IActionResult SearchCar()
+        //{
+        //    var model = GetCompanyModel();
+        //    CarDb cardb = new CarDb(_config);
+            
+        //    return View(model);
+        //}
+        //[HttpPost]
+        //public IActionResult SearchCar(string LicensePlate)
+        //{
+        //    var model = GetCompanyModel();
+        //    var CompanyId = model.CompanyId;
+        //    Car searchedCar = new Car();
+        //    var carDb = new CarDb(_config);
+        //    var cars = carDb.GetAllCars(CompanyId);
+        //    searchedCar = carDb.SearchCar(CompanyId, LicensePlate);
+        //    cars.Clear();
+        //    cars.Add(searchedCar);
+        //    return View(cars);
+        //}
 
 
         public IActionResult AllCars()
