@@ -11,4 +11,5 @@ namespace NorbitsChallenge.Models
         public Setting Setting { get; set; }
         public int CompanyId { get; set; }
     }
+
 }

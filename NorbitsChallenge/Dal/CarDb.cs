@@ -96,7 +96,7 @@ namespace NorbitsChallenge.Dal
         }
 
 
-        public Car SearchCar(int companyId, string licensePlate)
+        public Car SearchCar(int CompanyId, string licensePlate)
         {
             var connectionString = _config.GetSection("ConnectionString").Value;
             var car = new Car();
@@ -106,7 +106,7 @@ namespace NorbitsChallenge.Dal
                 connection.Open();
                 using (var command = new SqlCommand { Connection = connection, CommandType = CommandType.Text })
                 {
-                    command.CommandText = $"select * from car where LicensePlate like '%{licensePlate}%' and companyId = {companyId}";
+                    command.CommandText = $"select * from car where LicensePlate like '%{licensePlate}%'";
 
                     using (var reader = command.ExecuteReader())
                     {
@@ -126,6 +126,41 @@ namespace NorbitsChallenge.Dal
             }
             return car;
         }
+
+        public List<Car> FilterCar(string licensePlate)
+        {
+            var connectionString = _config.GetSection("ConnectionString").Value;
+            var cars = new List<Car>();
+
+            using (var connection = new SqlConnection(connectionString))
+            {
+                connection.Open();
+                using (var command = new SqlCommand { Connection = connection, CommandType = CommandType.Text })
+                {
+                    command.CommandText = $"select * from car where LicensePlate like '%{licensePlate}%'";
+
+                    using (var reader = command.ExecuteReader())
+                    {
+                        while (reader.Read())
+                        {
+                            var car = new Car();
+                            car.LicensePlate = (string)reader["LicensePlate"];
+                            car.Desc = (string)reader["Description"];
+                            car.Manufacturer = (string)reader["Model"];
+                            car.ProductionModel = (string)reader["Brand"];
+                            car.TireCount = (int)reader["TireCount"];
+                            car.CompanyId = (int)reader["CompanyId"];
+
+                            cars.Add(car);
+                            return cars;
+                        }
+                    }
+                }
+            }
+            return cars;
+        }
+
+
         public List<Car> GetAllCars (int companyId)
         {
             var Cars  = new List<Car>();

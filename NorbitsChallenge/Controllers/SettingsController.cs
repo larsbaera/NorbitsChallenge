@@ -5,6 +5,7 @@ using System.Threading.Tasks;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.Extensions.Configuration;
 using NorbitsChallenge.Dal;
+using NorbitsChallenge.Helpers;
 using NorbitsChallenge.Models;
 
 namespace NorbitsChallenge.Controllers
@@ -31,9 +32,9 @@ namespace NorbitsChallenge.Controllers
         [HttpPost]
         public IActionResult Update(SettingsInputModel input)
         {
-            new SettingsDb(_config).UpdateSetting(input.Setting, input.CompanyId);
-
-            return RedirectToAction("Index", new {companyId = input.CompanyId});
+            //new SettingsDb(_config).UpdateSetting(input.Setting, input.CompanyId);
+            UserHelper.CompanyId = input.CompanyId;
+            return RedirectToAction("Index", "Home", new {companyId = input.CompanyId});
         }
     }
 }

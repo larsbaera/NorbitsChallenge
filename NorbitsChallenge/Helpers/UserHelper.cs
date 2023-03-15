@@ -16,9 +16,11 @@ namespace NorbitsChallenge.Helpers
      */
     public static class UserHelper
     {
+        //initialize as one during startup and return whatever the value is later;
+        public static int CompanyId = 1;
         public static int GetLoggedOnUserCompanyId()
         {
-            return 1;
+            return CompanyId;
         }
     }
 }
